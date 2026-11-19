@@ -3,23 +3,110 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>Leonida Trophy Atlas — GTA VI Trophy Guide &amp; Tracker</title>
+<meta name="description" content="Offline guide and tracker for all 55 PlayStation 5 trophies of Grand Theft Auto VI: official names, descriptions and grades, a checklist that saves in your browser, a roadmap to the platinum, and the one missable trophy flagged.">
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="masthead">
+  <div class="masthead-text">
+    <p class="kicker">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies</p>
+    <h1>Leonida Trophy Atlas</h1>
+    <p class="lede">Every official trophy, a guide in plain words for each one, and a tracker that remembers your progress — all offline, all in your browser.</p>
+  </div>
+  <div class="platinum-card" id="platinumCard">
+    <p class="platinum-label">Platinum</p>
+    <p class="platinum-name">Vice Got a Price!</p>
+    <p class="platinum-sub">Congratulations! You&rsquo;re a Leonida Legend.</p>
+    <p class="platinum-state" id="platinumState">54 trophies to go</p>
+  </div>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
+
+<section class="dashboard" aria-label="Progress">
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="progress-line"><strong id="progressText">0 of 55 earned</strong> &middot; <span id="pointsText">0 of 1,350 points</span> &middot; <span id="percentText">0%</span></p>
+  </div>
+  <div class="grade-counts" id="gradeCounts"></div>
+</section>
+
+<section class="roadmap" aria-label="Roadmap to the platinum">
+  <h2>Roadmap to the platinum</h2>
+  <p class="section-note">Six stages, in the order that wastes the least time. About 200 hours in total (PowerPyx estimate); no online trophies, no difficulty trophies, no mission medals — long, not hard. Keep a manual save at the start of every chapter: there is no mission replay.</p>
+  <ol class="stages" id="stages"></ol>
+  <p class="missable-callout" id="missableCallout"></p>
+</section>
+
+<section class="controls" aria-label="Find and filter trophies">
+  <div class="control-row">
+    <label class="search-label">Search <input id="search" type="search" placeholder="Trophy name, mission or keyword…" autocomplete="off"></label>
+    <label>Kind
+      <select id="kind">
+        <option value="all">All kinds</option>
+        <option value="story">Story</option>
+        <option value="side">Side missions</option>
+        <option value="activity">Activities</option>
+        <option value="collectible">Collectibles</option>
+        <option value="exploration">Exploration</option>
+        <option value="combat">Combat</option>
+        <option value="heist">Heists &amp; robberies</option>
+        <option value="money">Money</option>
+        <option value="misc">Odd jobs &amp; secrets</option>
+      </select>
+    </label>
+    <label>Grade
+      <select id="grade">
+        <option value="all">All grades</option>
+        <option value="platinum">Platinum</option>
+        <option value="gold">Gold</option>
+        <option value="silver">Silver</option>
+        <option value="bronze">Bronze</option>
+      </select>
+    </label>
+    <label>Status
+      <select id="status">
+        <option value="all">Earned &amp; unearned</option>
+        <option value="earned">Earned only</option>
+        <option value="unearned">Unearned only</option>
+        <option value="missable">Missable only</option>
+      </select>
+    </label>
+    <label>Sort
+      <select id="sort">
+        <option value="id">In list order</option>
+        <option value="grade">By grade</option>
+        <option value="name">By name A–Z</option>
+      </select>
+    </label>
+  </div>
+  <div class="control-row">
+    <label class="toggle"><input id="spoilers" type="checkbox"> <span>Hide spoilers — conceal story &amp; hidden trophies until earned</span></label>
+    <label class="toggle"><input id="guidesOnly" type="checkbox"> <span>Show only trophies with an unconfirmed step</span></label>
+    <span class="spacer"></span>
+    <button id="export" type="button">Export progress</button>
+    <label class="import-btn">Import progress <input id="import" type="file" accept="application/json,.json"></label>
+    <button id="reset" type="button" class="danger">Reset progress</button>
+  </div>
+  <p class="result-count" id="resultCount"></p>
+</section>
+
+<main>
+  <div class="cards" id="cards"></div>
+  <p class="empty" id="empty" hidden>No trophies match those filters. Clear the search or pick another kind.</p>
+</main>
+
+<section class="about" aria-label="About this guide">
+  <h2>How this guide is built</h2>
+  <p>Trophy names, descriptions, grades and hidden flags are the official ones, as published on PlayStation and listed by <a href="https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/">Exophase</a>, cross-checked against PSNProfiles. The guides, the kind groupings and the roadmap stages are this guide&rsquo;s own work, written for this entry — they draw on the official descriptions plus PowerPyx and GTABase, and they never copy another guide&rsquo;s text. Where an official description is cryptic and no cited guide had confirmed the exact trigger at launch, the guide says so instead of inventing a step.</p>
+  <p>Kinds (story, side missions, activities, collectibles, exploration, combat, heists, money, odd jobs) are our grouping, not PlayStation&rsquo;s. Points are the PlayStation values: platinum 300, gold 90, silver 30, bronze 15 — 1,350 in total. Your checklist is stored only in this browser (localStorage); export saves it as a JSON file you can import on another machine. Nothing here needs the network: open <code>index.html</code> with the network off and it works.</p>
+  <p class="fineprint">Unofficial fan guide. Not affiliated with Rockstar Games, Take-Two Interactive or Sony Interactive Entertainment. No Rockstar logo or official artwork is used.</p>
+</section>
+
+<footer>
+  <p>Leonida Trophy Atlas &middot; GTA VI, 55 trophies &middot; Data: Exophase / PSNProfiles &middot; Method: PowerPyx, GTABase</p>
+</footer>
+
 <script type="module" src="app.js"></script>
 </body>
 </html>
